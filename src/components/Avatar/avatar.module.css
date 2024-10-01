@@ -12,3 +12,11 @@
     font-weight: 600;
     line-height: 150%; 
 }
+
+.textName{
+    color: black;
+}
+
+.imageAvatar{
+    border-radius: 50%;
+}

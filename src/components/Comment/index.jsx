@@ -14,7 +14,7 @@ export const Comment = ({ comment }) => {
             imageSrc={imageSrc}
             name={name}
         />)}
-        <strong>@{comment.author.name}</strong>
+        
         <p>{comment.text}</p>
     </div>)
 }
