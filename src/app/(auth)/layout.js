@@ -1,7 +1,7 @@
 import { Prompt } from 'next/font/google'
 
 import { Aside } from '@/components/Aside'
-import './globals.css'
+import '../globals.css'
 import { SearchForm } from '@/components/SearchForm'
 
 export const metadata = {
@@ -15,7 +15,7 @@ const prompt = Prompt({
   display: 'swap',
 })
 
-export default function RootLayout({ children }) {
+export default function AuthLayout({ children }) {
   return (
     <html lang="pt-br" className={prompt.className}>
       <body>
