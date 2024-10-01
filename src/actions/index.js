@@ -4,6 +4,8 @@ import { revalidatePath } from "next/cache";
 import db from "../../prisma/db";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation"
+import bcrypt from "bcrypt"
 
 export async function incrementThumbsUp(post) {
 
@@ -31,7 +33,7 @@ export async function postComment(post, formData) {
     //     }
     // })
 
-    const session  = await getServerSession(options)
+    const session = await getServerSession(options)
 
     await db.comment.create({
         data: {
@@ -69,4 +71,34 @@ export async function postReply(parent, formData) {
         }
     })
     revalidatePath(`/${post.slug}`)
+}
+
+export async function createUser(formData) {
+   try {
+ 
+    console.log("iniciando cadastro de usurio ")
+
+    const hashPassword = bcrypt.hashSync(formData.get("password"),10)
+
+     
+    await db.user.create({
+        data : {
+            name : formData.get("name"),
+            email : formData.get("email"),
+            password : hashPassword
+        }
+    })
+    
+     console.log("cadastro finalizado")
+
+    
+     
+
+   } catch (error) {
+       console.log("falha ao criar usuario -> ", error)
+       return
+   }
+
+
+   redirect("/signin")
 }
