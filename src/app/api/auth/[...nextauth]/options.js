@@ -1,37 +1,69 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import GitHubProvider from "next-auth/providers/github";
-import CredendtialsProvider from "next-auth/providers/credentials";
+import CredentialsProvider from "next-auth/providers/credentials";
 import db from "../../../../../prisma/db";
+import bcrypt from "bcrypt";
 
 export const options = {
+    session: {
+        strategy: "jwt",
+        maxAge: 3000
+    },
     adapter: PrismaAdapter(db),
     providers: [
         GitHubProvider({
             clientId: process.env.GITHUB_ID,
-            clientSecret: process.env.GITHUB_SECRET
+            clientSecret: process.env.GITHUB_SECRET,
         }),
-        CredendtialsProvider({
-            email : {
-                label : "E-mail",
-                type : "email",
-                placeHolder : "digite seu email"
+        CredentialsProvider({
+            name: "Credentials",
+            credentials: {
+                email: {
+                    label: "E-mail",
+                    type: "email",
+                    placeholder: "digite seu email",
+                },
+                password: {
+                    label: "your password",
+                    type: "password",
+                    placeholder: "Enter your password",
+                },
             },
-            password :  {
-                label : "your password",
-                type : "password",
-                placeHolder : "Enter your password"
-            }
-        })
+            async authorize(credentials) {
+                try {
+                    const { email, password } = credentials;
+
+                    const foundUser = await db.user.findFirst({
+                        where: { email: email },
+                    });
+
+                    if (foundUser) {
+                        const passwordMatch = await bcrypt.compare(password, foundUser.password); // Corrección aquí
+
+                        if (passwordMatch) {
+                            console.log("dados corretos");
+                            delete foundUser.password; // Para no enviar la 
+                            delete foundUser.image
+                            return foundUser;
+                        }
+                    }
+                } catch (error) {
+                    console.log("Erro ao fazer validação de credentials ->", error);
+                }
+
+                // Si no se puede validar las credenciales, devuelve null    
+                return null;
+            },
+        }),
     ],
 
     callbacks: {
-        async session({ session, user }) {
+        async session({ session, token }) {
             if (session?.user) {
-                session.user.id = user.id;
+                session.user.id = parseInt(token.sub);
                 // session.user.role = user.role; // Adiciona o role ao objeto de sessão
             }
             return session;
-        }
-    }
-
-}
+        },
+    },
+};

@@ -15,6 +15,8 @@ export const Aside = async () => {
 
     const session = await getServerSession(options)
 
+    console.log(session)
+
 
 
    
