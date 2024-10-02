@@ -1,7 +1,15 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"]
     }
-  }
+  },
+  "include": [
+    "src/**/*",
+    "prisma/**/*" // Inclui todos os arquivos na pasta prisma
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
