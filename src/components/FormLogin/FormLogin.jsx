@@ -2,10 +2,10 @@
 
 import styles from './form-login.module.css'
 import { Label } from '@/components/Label'
-import { Input } from '@/components/input'
 import { Button } from '@/components/Button'
 import { ArrowFoward } from '@/components/icons/ArrowFoward'
 import { useState } from 'react'
+import { Input } from '../input/input'
 
 export default function FormLogin() {
 
