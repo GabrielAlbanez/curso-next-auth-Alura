@@ -2,7 +2,6 @@ import Image from 'next/image'
 import banner from './banner-signon.png'
 import styles from './signon.module.css'
 import { Label } from '@/components/Label'
-import { Input } from '@/components/input'
 import { Button } from '@/components/Button'
 import { ArrowFoward } from '@/components/icons/ArrowFoward'
 import { TextDivider } from '@/components/TextDivider'
@@ -11,6 +10,7 @@ import Link from 'next/link'
 import { Login } from '@/components/icons/Login'
 import { Checkbox } from '@/components/chekBox'
 import { createUser } from '@/actions'
+import { Input } from '@/components/input/input'
 export default async function SignOn() {
   return (
     <main className={styles.main}>

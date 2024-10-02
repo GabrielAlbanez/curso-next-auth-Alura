@@ -6,8 +6,8 @@ import Link from 'next/link'
 import { Login } from '@/components/icons/Login'
 
 import { TextDivider } from '@/components/TextDivider'
-import FormLogin from '@/components/FormLogin'
 import { Providers } from '@/components/Providers'
+import FormLogin from '@/components/FormLogin/FormLogin'
 export default function Signup() {
   return (
     <main className={styles.main}>
