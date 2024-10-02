@@ -7,7 +7,7 @@
   },
   "include": [
     "src/**/*",
-    "prisma/**/*" // Inclui todos os arquivos na pasta prisma
+    "prisma/seed.js" // Inclui todos os arquivos na pasta prisma
   ],
   "exclude": [
     "node_modules"
