@@ -3,6 +3,9 @@ import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import db from "../../../../../prisma/db";
 import bcrypt from "bcrypt";
+import NextAuth from "next-auth/next";
+
+
 
 export const options = {
     session: {
@@ -29,6 +32,9 @@ export const options = {
                     placeholder: "Enter your password",
                 },
             },
+ 
+            
+
             async authorize(credentials) {
                 try {
                     const { email, password } = credentials;
@@ -58,12 +64,28 @@ export const options = {
     ],
 
     callbacks: {
+
+        async jwt({token,user}){
+            if(user){
+                token.avatar = user.avatar
+            }
+            return token;
+        },
+
         async session({ session, token }) {
             if (session?.user) {
                 session.user.id = parseInt(token.sub);
+                session.user.avatar = token.avatar
                 // session.user.role = user.role; // Adiciona o role ao objeto de sessão
             }
             return session;
         },
     },
 };
+
+
+export const {
+    auth,
+    signIn,
+    signOut,
+  } = NextAuth(options);
