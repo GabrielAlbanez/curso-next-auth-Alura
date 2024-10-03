@@ -8,6 +8,7 @@ import styles from "./profile-avatar.module.css"
 export const ProfileImageUploader = ({ user }) => {
     const [image, setImageSrc] = useState(user.avatar ?? user.image ?? avatarDefault)
     const [newAvatar, setNewAvatar] = useState(null)
+    const [showModal, setShowModal] = useState(false)
 
     const handleFileChange = (event) => {
         const file = event.target.files[0]
@@ -16,6 +17,7 @@ export const ProfileImageUploader = ({ user }) => {
             const reader = new FileReader()
             reader.onloadend = () => {
                 setImageSrc(reader.result)
+                setShowModal(true)
             }
             reader.readAsDataURL(file)
         }

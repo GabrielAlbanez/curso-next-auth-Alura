@@ -1,7 +1,7 @@
-import styles from './label.mudule.css'
+import style from './label.module.css'
 
 export const Label = ({ children, ...rest }) => {
-    return <label {...rest} className={styles.label}>
+    return <label {...rest} className={style.Label}>
         {children}
     </label>
 }
