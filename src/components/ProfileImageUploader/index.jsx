@@ -9,6 +9,7 @@ export const ProfileImageUploader = ({ user }) => {
 
     const [image, setImageSrc] = useState(user.avatar ?? user.image ?? avatarDefault)
     const [newAvatar, setNewAvatar] = useState(null)
+    
     const handleFileChange = (event) => {
 
         const file = event.target.files[0]
@@ -25,6 +26,14 @@ export const ProfileImageUploader = ({ user }) => {
 
 
     }
+    
+
+  
+    
+
+
+
+    
 
     function uploadAvatar(event){
         event.preventDefault()
@@ -62,7 +71,7 @@ export const ProfileImageUploader = ({ user }) => {
 
             <input type="file"
                 required
-                onChange={handleFileChange()} //valor do input for atterado chama a função que vc passar no onChange
+                onChange={handleFileChange} //valor do input for atterado chama a função que vc passar no onChange
                 
             />
             <Button >Upload Img</Button>

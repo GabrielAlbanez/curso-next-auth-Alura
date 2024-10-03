@@ -2,7 +2,9 @@ import db from "../../../prisma/db";
 
 
 export async function GET (_request, { params }) {
-    const replies = await db.comment.findMany({
+    if(params.id){
+
+            const replies = await db.comment.findMany({
         where: {
             parentId: parseInt(params.id)
         },
@@ -11,4 +13,7 @@ export async function GET (_request, { params }) {
         }
     })
     return Response.json(replies)
+
+    }
+
 }
