@@ -5,6 +5,7 @@ import { SearchForm } from '@/components/SearchForm'
 import { SessionProvider } from "next-auth/react"
 import { options } from './api/auth/[...nextauth]/options'
 import { auth } from './api/auth/[...nextauth]/route'
+import AuthProvider from '@/components/AuthProvider'
 
 // export const metadata = {
 //   title: 'Code Connect',
@@ -24,11 +25,14 @@ export default async function RootLayout({ children }) {
 
   return (
 
+
     <html lang="pt-br" className={prompt.className}>
 
-        <body>
+      <body>
+        <AuthProvider>
           {children}
-        </body>
+        </AuthProvider>
+      </body>
 
     </html>
 

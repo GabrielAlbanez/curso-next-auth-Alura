@@ -50,7 +50,7 @@ export const options = {
                             console.log("dados corretos");
                             delete foundUser.password; // Para no enviar la 
                             delete foundUser.image
-                            return foundUser;
+                            return foundUser; //esse return found user, vai ser o valor que vai ser aarmazenado na session
                         }
                     }
                 } catch (error) {
@@ -81,6 +81,9 @@ export const options = {
             return session;
         },
     },
+    pages : {
+        signIn : "/signin"
+    }
 };
 
 

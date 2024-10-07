@@ -8,7 +8,7 @@ import { Login } from '@/components/icons/Login'
 import { TextDivider } from '@/components/TextDivider'
 import { Providers } from '@/components/Providers'
 import FormLogin from '@/components/FormLogin/FormLogin'
-export default function Signup() {
+export default function Signin() {
   return (
     <main className={styles.main}>
       <div>
